@@ -74,6 +74,7 @@ ULIB =
 
 # Hier eure source files hinzufügen
 SRC = arch/cpu/entry.S arch/cpu/powerdown.c kernel/start.c kernel/config.c arch/bsp/yellow_led.c lib/ubsan.c lib/string.c
+SRC += arch/bsp/uart.c lib/kprintf.c kernel/tests.c
 
 # Hier separate user source files hinzufügen
 USRC = user/main.c user/config.c
