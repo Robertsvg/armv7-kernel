@@ -1,12 +1,10 @@
 #include <arch/bsp/uart.h>
 #include <kernel/ktest.h>
-#include <kernel/tests.h>
 #include <lib/kprintf.h>
 
 void start_kernel [[noreturn]] (void);
 void start_kernel [[noreturn]] (void)
 {
-	test_kprintf();
 	kprintf("=== Betriebssystem gestartet ===\n");
 	test_kernel();
 
