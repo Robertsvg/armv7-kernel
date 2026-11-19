@@ -6,26 +6,20 @@
 #define undefeq .word 0x07ffffff
 
 #ifdef BUILD_FOR_QEMU
-	#define wait_count_1 #0x80000000
-	#define wait_count_2 #0x0A000000
+	#define check_return_wait_count #0x00300000
+	#define psrs_wait_count #0x001e0000
 #else
-	#define wait_count_1 #0x00800000
-	#define wait_count_2 #0x01000000
+	#define check_return_wait_count #0x00800000
+	#define psrs_wait_count #0x01000000
 #endif
 
 
 
-#undef  PSR_SYS
 #define PSR_SYS (0b11111)
-#undef  PSR_ABT
 #define PSR_ABT (0b10111)
-#undef  XOR_SYS_ABT
 #define XOR_SYS_ABT (PSR_SYS ^ PSR_ABT)
-#undef  PSR_I
 #define PSR_I (1<<7)
-#undef  PSR_F
 #define PSR_F (1<<6)
-#undef  PSR_V
 #define PSR_V (1<<28)
 
 /* Kann als backup genutzt werden, falls Qemu undefne/undefeq nicht
@@ -57,7 +51,7 @@ _check_throw_undef:
  */
 .global _check_return_jump
 _check_return_jump:
-	mov	r0, wait_count_1
+	mov	r0, check_return_wait_count
 	b	1f
 	undef
 	undef
@@ -101,10 +95,9 @@ _check_return_jump:
  */
 .global _check_registers
 _check_registers:
-#undef STEP
-#define STEP (452)
-#undef END
-#define END (0xfffffff0)
+#define STEP (7)
+#define NUMBER_OF_STEPS (1 << 19)
+#define END (STEP * NUMBER_OF_STEPS)
 #if (END % STEP)
 #error "END needs to be a whole multiple of STEP"
 #endif
@@ -227,7 +220,7 @@ _check_cpsr:
 	ands	r2, r0, #(1<<6)
 	eoreq	r3, r3, #XOR_SYS_ABT
 
-	cmp	r0, wait_count_2
+	cmp	r0, psrs_wait_count
 	bne	1b
 
 	msr	cpsr, r4
@@ -281,7 +274,7 @@ _check_spsr:
 	ands	r2, r0, #(1<<6)
 	eoreq	r3, r3, #XOR_SYS_ABT
 
-	cmp	r0, wait_count_2
+	cmp	r0, psrs_wait_count
 	bne	1b
 
 	msr	spsr, r4
