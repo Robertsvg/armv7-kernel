@@ -37,10 +37,10 @@ void uart_init(void)
 
 void uart_handle_irq(void)
 {
+	uart->icr = UART_RX_IRQ | UART_RT_IRQ;
 	while (!(uart->fr & UART_RXFE)) {
 		buff_putc(receive_buffer, (char)(unsigned char)uart->dr);
 	}
-	uart->icr = UART_RX_IRQ | UART_RT_IRQ;
 	asm volatile("dsb sy" ::: "memory");
 }
 
