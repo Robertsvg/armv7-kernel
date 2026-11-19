@@ -13,6 +13,15 @@ SECTIONS
 	.data : { *(.data .data.*) }
 	.bss  : { *(.bss .bss.*)  }
 
+	STACK_SIZE = 16 * 1024;
+	.stacks ALIGN(8) (NOLOAD) : {
+		. += STACK_SIZE; stack_sys_top = .;
+		. += STACK_SIZE; stack_irq_top = .;
+		. += STACK_SIZE; stack_abt_top = .;
+		. += STACK_SIZE; stack_und_top = .;
+		. += STACK_SIZE; stack_svc_top = .;
+	}
+
 	/* We should not need thumb mode, hence we do not need glue code.
 	   If you want to use thumb mode you will have to figure out how to either
 	   use it only in the kernel or the userspace. Or figure out how to

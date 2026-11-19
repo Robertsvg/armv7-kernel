@@ -20,12 +20,12 @@
 /**
  * \brief Setzt Kernelkonfigurationsvariablen zur Laufzeit.
  */
-void test_kernel_set_config [[gnu::weak]] (void);
+void test_kernel_set_config [[gnu::weak]](void);
 
 /**
  * \brief Führt Kerneltestcode aus.
  */
-void test_kernel [[gnu::weak]] (void);
+void test_kernel [[gnu::weak]](void);
 
 #endif // __ASSEMBLER__
 #endif // KTEST_H_

@@ -1,4 +1,5 @@
 #include <kernel/ktest.h>
+#include <arch/cpu/psr.h>
 
 .section .init
 
@@ -37,7 +38,30 @@ _enableAlignCheck:
 
 _bsprak:
 	/* Validen Stack Pointer setzten */
-	ldr sp,=0x100000
+	cpsid if
+	cps #PSR_SYS
+	ldr sp, =stack_sys_top
+	mov lr, #0
+	cps #PSR_IRQ
+	ldr sp, =stack_irq_top
+	mov lr, #0
+	cps #PSR_ABT
+	ldr sp, =stack_abt_top
+	mov lr, #0
+	cps #PSR_UND
+	ldr sp, =stack_und_top
+	mov lr, #0
+	cps #PSR_SVC
+	ldr sp, =stack_svc_top
+	mov lr, #0
+
+	mrc p15, 0, r0, c1, c0, 0
+	bic r0, r0, #(1 << 13)
+	bic r0, r0, #(1 << 30)
+	mcr p15, 0, r0, c1, c0, 0
+	ldr r0, =exception_vectors
+	mcr p15, 0, r0, c12, c0, 0
+	isb
 
 	/* Ermöglicht der Testbibliothek frühzeitig Konfigurationsvariablen
 	 * in der kernel/config.c auf einen gewünschten Wert zu setzen.

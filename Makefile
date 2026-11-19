@@ -75,6 +75,8 @@ ULIB =
 # Hier eure source files hinzufügen
 SRC = arch/cpu/entry.S arch/cpu/powerdown.c kernel/start.c kernel/config.c arch/bsp/yellow_led.c lib/ubsan.c lib/string.c
 SRC += arch/bsp/uart.c lib/kprintf.c
+SRC += arch/bsp/interrupts.c arch/bsp/systimer.c arch/cpu/trampolines.S arch/cpu/exceptions.c
+SRC += tests/regcheck.c tests/regcheck_asm.S
 
 # Hier separate user source files hinzufügen
 USRC = user/main.c user/config.c
@@ -99,7 +101,7 @@ ifeq ($(MODE), strict)
 endif
 
 # Gleiches gilt für Linkerflags, solltet ihr bspw. die libgcc mitlinken müssen
-LDFLAGS = --warn-common --orphan-handling=warn
+LDFLAGS = --warn-common --orphan-handling=warn -z noexecstack
 
 # Hier den git branch angeben, der für die Abgabe benutzt werden soll
 SUBMISSION_BRANCH = main
