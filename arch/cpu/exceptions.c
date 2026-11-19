@@ -2,7 +2,9 @@
 #include <arch/bsp/systimer.h>
 #include <arch/bsp/uart.h>
 #include <arch/cpu/exceptions.h>
+#include <arch/cpu/powerdown.h>
 #include <arch/cpu/psr.h>
+#include <kernel/config.h>
 #include <lib/kprintf.h>
 #include <stddef.h>
 
@@ -162,7 +164,11 @@ void exception_handler(const struct exception_frame *frame, enum exception_type 
 	print_exception_infos(frame, type);
 	uart_putc('\4');
 	asm volatile("cpsid if" ::: "memory");
+#ifdef BUILD_FOR_QEMU
+	powerdown();
+#else
 	while (true) {
 		asm volatile("wfi");
 	}
+#endif
 }
