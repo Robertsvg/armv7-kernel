@@ -1,6 +1,6 @@
 # Development
 
-## Course runtime
+## Runtime prerequisites
 
 Use a Linux environment with GNU Make and m4, plus the tools built from the
 course's `toolchain.tar.gz`. Follow that archive's README for installation and
@@ -95,16 +95,16 @@ files and checks patch whitespace. `.clang-format-ignore` leaves supplied course
 source unchanged. CI does not have the authenticated course toolchain or the
 ISIS grader, so its green status represents source checks, not a runtime grade.
 
-## Assignment workflow
+## Stage workflow
 
-Develop each next assignment on its own branch and commit meaningful changes as
-they are made. Run the course build and relevant runtime checks before merging
-the completed work into `main`. Tag each completed milestone as `aufgabe-N`.
+Develop each next stage on its own branch and commit meaningful changes as
+they are made. Run the build and relevant runtime checks before merging
+the completed work into `main`. Tag each completed milestone as `stage-N`.
 
 To inspect a completed historical version:
 
 ```bash
-git switch --detach aufgabe-1
+git switch --detach stage-1
 make clean
 make qemu
 git switch main

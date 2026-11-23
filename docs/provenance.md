@@ -12,13 +12,13 @@ authors or timestamps.
 | Milestone | Original source commit |
 | --- | --- |
 | Initial E0 scaffold | `4405f6a` |
-| Final revised Aufgabe 1 | `2876e9b5980c989baf24bcf9f11ebdd94d224e23` |
-| Final revised Aufgabe 2, updated official checker | `388977b6cced23f577750c9c0c752e0e104d65cf` |
+| Stage 1 (Aufgabe 1), final revised source | `2876e9b5980c989baf24bcf9f11ebdd94d224e23` |
+| Stage 2 (Aufgabe 2), updated official checker | `388977b6cced23f577750c9c0c752e0e104d65cf` |
 
 The Aufgabe 2 source matches the final course archive whose SHA-256 is
 `ed199a6fe680e2210a582f5be0d83bc4ccead70fbc86bcfba6ffa2e8567e3fdb`.
 That archive's 60/60 ISIS result was confirmed after the checker update.
-The annotated tags `aufgabe-1` and `aufgabe-2` mark the final revised source
+The annotated tags `stage-1` and `stage-2` mark the final revised source
 checkpoints. Repository documentation and CI were added afterward.
 
 ## Assignment implementation
