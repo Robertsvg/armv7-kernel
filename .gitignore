@@ -1,3 +1,28 @@
-build
-*.pdf
+# Generated compiler, linker, emulator and submission files.
+/build/
+*.o
+*.d
+*.elf
+*.bin
+*.img
+*.qcow2
 *.gz
+*.tar
+*.tgz
+*.zip
+
+# Course handouts and downloaded archives stay outside the repository.
+*.pdf
+
+# Local editor, Python and credential state.
+.vscode/
+.idea/
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db

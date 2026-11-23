@@ -1,0 +1,14 @@
+# Keep supplied course code unchanged; format maintained assignment code.
+arch/bsp/yellow_led.c
+arch/cpu/powerdown.c
+include/arch/bsp/yellow_led.h
+include/arch/cpu/powerdown.h
+include/kernel/*.h
+include/lib/ringbuffer.h
+include/tests/*.h
+include/user/*.h
+kernel/config.c
+lib/string.c
+lib/ubsan.c
+tests/*.c
+user/*.c
